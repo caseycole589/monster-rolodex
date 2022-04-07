@@ -4,7 +4,7 @@ import { Component } from "react"
 class App extends Component {
   constructor() {
     super()
-    this.state = {
+     = {
       monsters: [],
       searchValue: ""
     }
@@ -24,8 +24,8 @@ class App extends Component {
     })
   }
   render() {
-    const filterMonsters = this.state.monsters.filter(obj => obj.name.includes(this.state.searchValue))
-
+    const { monsters, searchValue } = this.state
+    const filterMonsters = monsters.filter(obj => obj.name.includes(searchValue))
     return (
       <div className="App">
         <input className="search-box" type="search" placeholder="Search Monsters" onChange={this.handleOnChange} />
