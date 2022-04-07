@@ -4,7 +4,7 @@ import { Component } from "react"
 class App extends Component {
   constructor() {
     super()
-     = {
+    this.state = {
       monsters: [],
       searchValue: ""
     }
@@ -13,22 +13,23 @@ class App extends Component {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(resp => resp.json())
       .then(monsters =>
-        this.setState(prevState => {
-          return { monsters: monsters, monstersFiltered: monsters }
+        this.setState(() => {
+          return { monsters }
         })
       )
   }
-  handleOnChange = e => {
+  handleChange = e => {
     this.setState(() => {
-      return { searchValue: e.target.value.toLocaleLowerCase() }
+      return { searchValue: e.target.value.toLowerCase() }
     })
   }
   render() {
     const { monsters, searchValue } = this.state
-    const filterMonsters = monsters.filter(obj => obj.name.includes(searchValue))
+    const filterMonsters = monsters.filter(obj => obj.name.toLowerCase().includes(searchValue))
+
     return (
       <div className="App">
-        <input className="search-box" type="search" placeholder="Search Monsters" onChange={this.handleOnChange} />
+        <input className="search-box" type="search" placeholder="Search Monsters" onChange={this.handleChange} />
         {filterMonsters.map(monster => {
           return (
             <div key={monster.id}>
