@@ -5,22 +5,31 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      monsters: []
+      monsters: [],
+      searchValue: ""
     }
   }
-  async componentDidMount() {
+  componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(resp => resp.json())
       .then(monsters =>
         this.setState(prevState => {
-          return { monsters }
+          return { monsters: monsters, monstersFiltered: monsters }
         })
       )
   }
+  handleOnChange = e => {
+    this.setState(() => {
+      return { searchValue: e.target.value.toLocaleLowerCase() }
+    })
+  }
   render() {
+    const filterMonsters = this.state.monsters.filter(obj => obj.name.includes(this.state.searchValue))
+
     return (
       <div className="App">
-        {this.state.monsters.map(monster => {
+        <input className="search-box" type="search" placeholder="Search Monsters" onChange={this.handleOnChange} />
+        {filterMonsters.map(monster => {
           return (
             <div key={monster.id}>
               <h1>{monster.name}</h1>
