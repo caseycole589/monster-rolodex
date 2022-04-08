@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* <input className="search-box" type="search" placeholder="Search Monsters" onChange={this.handleChange} /> */}
-        <SearchBox handleChange={this.handleChange} />
+        <SearchBox className="monster-search-box" handleChange={this.handleChange} />
         <CardList monsters={filterMonsters} />
       </div>
     )
