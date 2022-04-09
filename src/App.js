@@ -3,7 +3,7 @@ import { CardList } from "./components/card-list/card-list"
 import { SearchBox } from "./components/search-box/search-box"
 import { useState, useEffect } from "react"
 
-const App = () => {
+export const App = () => {
   const [monsters, setMonsters] = useState([])
   const [searchField, setSearchField] = useState("")
   const [filterMonsters, setFilterMonsters] = useState(monsters)
